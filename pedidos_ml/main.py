@@ -14,8 +14,8 @@ def pedidos_ml():
         
         #? Configurações de planilha e horários
 
-        #* Definir localização para português
-        locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
+        ##* Definir localização para português
+        #locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
         #* ID da planilha do BD
         spreadsheet_id = '1yAbwVoG3H1F70UTVSqMVLfmAjWEL0f7viqfqZfZAsys'
 

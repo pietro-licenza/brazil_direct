@@ -85,9 +85,10 @@ def pedidos_ml():
         return "Operação Concluída Com Sucesso!"
 
     except Exception as e:
-        return "Operação Cancelada!"
+    
         print('Houve algum erro ao processar os dados. Verifique a exception do Python:')
         print(f"Exception: {e}") 
+        return "Operação Cancelada!"
 
 if __name__ == '__main__':
     app.run(debug=True)

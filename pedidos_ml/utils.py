@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime,date
 from auth import *
+import re
 
 ############################################################
 #                    AUTENTICAÇÕES                         #
@@ -33,11 +34,37 @@ def authenticate_gsheets(service_account_json, sheet_scopes):
 
 #! Formatar datas - Por enquanto apenas datas do Mercado Livre
 def formatar_data(data_string):
-    
-    #? Data do Mercado Livre vem da seguinte maneira: 19 de fevereiro de 2024 19:35 hs.
-
-    data_formatada = datetime.strptime(data_string, "%d de %B de %Y %H:%M hs.")
-    return data_formatada.strftime("%d/%m/%Y")
+#
+#    #? Data do Mercado Livre vem da seguinte maneira: 19 de fevereiro de 2024 19:35 hs.
+#
+#    data_formatada = datetime.strptime(data_string, "%d de %B de %Y %H:%M hs.")
+#    return data_formatada.strftime("%d/%m/%Y")
+#
+  # Expressão regular para extrair dia, mês, ano, hora e minuto da string de data
+  pattern = r'(\d{1,2}) de (\w+) de (\d{4}) (\d{2}):(\d{2}) hs\.'
+  match = re.match(pattern, data_string)
+  
+  if match:
+      day = int(match.group(1))
+      month_name = match.group(2)
+      year = int(match.group(3))
+      hour = int(match.group(4))
+      minute = int(match.group(5))
+      
+      # Mapear o nome do mês para um número de mês
+      months = {
+          'janeiro': 1, 'fevereiro': 2, 'março': 3, 'abril': 4,
+          'maio': 5, 'junho': 6, 'julho': 7, 'agosto': 8,
+          'setembro': 9, 'outubro': 10, 'novembro': 11, 'dezembro': 12
+      }
+      month = months.get(month_name.lower())
+      
+      if month:
+          # Construir e retornar a data formatada
+          return "{:02d}/{:02d}/{:04d}".format(day, month, year)
+  
+  # Se a correspondência falhar, lançar uma exceção ou retornar a string original, dependendo do seu caso
+  raise ValueError("Formato de data inválido: {}".format(data_string))
 #end def
 
 #! Colar valores finais na aba output

@@ -195,15 +195,17 @@ def df_enviados_ml(df, colunas_desejadas, status_cancelado, status_devolucao):
 def cria_df_enviados_ml(df):
   #* Cria matriz das colunas do dataframe final
   df_final = pd.DataFrame({
-      'Data': df['Data da venda'],
       'Número da Venda': "'" + df['N.º de venda'].astype(str),
+      'Data': df['Data da venda'],
       'Item (nome)': df['Título do anúncio'],
       'MarketPlace': 'Mercado Livre',
-      'Status': df['Status'],
       'Valor Nota (Total)': df['Receita por produtos (BRL)'],
       'Repasse': df['Total (BRL)'],
       'Imposto': df['Imposto'],
       'Valor do Imposto': df['Valor do Imposto'],
+      'Valor Custo': "",
+      'Lucro': "",
+      'Status': df['Status'],
   })
 
   #* Remove linhas em branco

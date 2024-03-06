@@ -17,7 +17,7 @@ def pedidos_ml():
         ##* Definir localização para português
         #locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
         #* ID da planilha do BD
-        spreadsheet_id = '1yAbwVoG3H1F70UTVSqMVLfmAjWEL0f7viqfqZfZAsys'
+        spreadsheet_id = '1IO3V3CjLtzj8XnQSh76PcyqV_7XW28DJ4QmGU5k-pqY'
 
         #? Autenticando no Google Sheets
         sheet_client                  = authenticate_gsheets(service_account_json=service_account_json, sheet_scopes=sheets_scopes)
